@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class CommentService {
-    
+
     private CommentRepository commentRepository;
     private UserService userService;
     private PostService postService;
@@ -42,17 +42,17 @@ public class CommentService {
         Post post = postService.getOnePostById(newCommentRequest.getPostId());
         User user = userService.getOneUser(newCommentRequest.getUserId());
 
-        if (user == null && post == null) {
-            return null;
+        if (user != null && post != null) {
+            Comment aComment = new Comment();
+            aComment.setId(newCommentRequest.getId());
+            aComment.setText(newCommentRequest.getText());
+            aComment.setUser(user);
+            aComment.setPost(post);
+
+            return commentRepository.save(aComment);
         }
 
-        Comment aComment = new Comment();
-        aComment.setId(newCommentRequest.getId());
-        aComment.setText(newCommentRequest.getText());
-        aComment.setUser(user);
-        aComment.setPost(post);
-
-        return commentRepository.save(aComment);
+        return null;
     }
 
     public Comment updateOneCommentById(Long commentId, CommentUpdateRequest updateComment) {

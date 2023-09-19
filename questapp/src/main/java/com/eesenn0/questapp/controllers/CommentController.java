@@ -21,15 +21,16 @@ import com.eesenn0.questapp.services.CommentService;
 @RestController
 @RequestMapping("/comments")
 public class CommentController {
-    
+
     private CommentService commentService;
 
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
 
-    @GetMapping 
-    public List<Comment> getAllComments(@RequestParam Optional<Long> postId, @RequestParam Optional<Long> userId) {
+    @GetMapping
+    public List<Comment> getAllComments(@RequestParam Optional<Long> postId,
+            @RequestParam Optional<Long> userId) {
         return commentService.getAllComments(postId, userId);
     }
 
@@ -44,7 +45,8 @@ public class CommentController {
     }
 
     @PutMapping("/{commentId}")
-    public Comment updateOneComment(@PathVariable Long commentId, @RequestBody CommentUpdateRequest updateComment) {
+    public Comment updateOneComment(@PathVariable Long commentId,
+            @RequestBody CommentUpdateRequest updateComment) {
         return commentService.updateOneCommentById(commentId, updateComment);
     }
 
@@ -52,6 +54,5 @@ public class CommentController {
     public void deleteOneComment(@PathVariable Long commentId) {
         commentService.deleteOneCommentById(commentId);
     }
-    
-}   
 
+}
