@@ -21,7 +21,7 @@ import com.eesenn0.questapp.services.PostService;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
-    
+
     private PostService postService;
 
     public PostController(PostService postService) {
@@ -48,9 +48,9 @@ public class PostController {
         return postService.updateOnePostById(postId, updatePost);
     }
 
-    @DeleteMapping("/{postId}") 
-        public void deleteOnePost(@PathVariable Long postId) {
-            postService.deleteOnePostById(postId);
-        }
-    
+    @DeleteMapping("/{postId}")
+    public void deleteOnePost(@PathVariable Long postId) {
+        postService.deleteOnePostById(postId);
+    }
+
 }
